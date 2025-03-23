@@ -1,0 +1,164 @@
+<!-- 
+https://www.youtube.com/watch?v=JWhRMyyF7nc&list=PL8S9HOZ5ieePRY2ml0MqFmuBcTrh-S0qd
+1:55
+
+  * Directive
+    ** Used to Iterating Arrays | @for of loop
+    ** Checking if the array has items as well | @if
+
+  * Binding Data to properties and attributes
+    ** Checking if the checkbox is checked or not | [checked]="false/true"
+    ** Property binding with a [propery]="javascript express the needs to be binded"
+    ** Javascript binding - [colSpan]
+    ** HTML binding - [colspan]
+    ** Propery binding - [checked]
+    ** Attribute binding - [attr.data-index]
+
+  * Event Binding
+    ** Is events when a user does something like a click then you can run a function
+    ** (event)="functionCall()"
+    ** $event will pass the event object to our function
+    ** Passing the item from the array
+    ** Property binding is a one way binding
+    ** Event lets user interact with the application and forms allows users to provide data to our applications
+
+  * Forms | ngModel to bind values to form control
+    ** Reactive Forms more rebust and scalable approach
+    ** template-driven forms - used to define or forms inside of our template
+    ** Use to stop the form from submitting | $event.preventDefault()
+    ** Import FormsModule to use [(ngModel)] for the input in the form
+    ** name attribute in <input> element, is used to reference elements in JavaScript or form data after submission.
+    ------------------------------------------------------------------------------------------------------------------------------------
+    *** ngModel gets the value and passes it to newWishText(component) which updates the value in ts file (two way binding)
+    *** then when the button is clicked addNewWish function is called which has the updated newWishText value and pushes it to the array
+    ------------------------------------------------------------------------------------------------------------------------------------
+    *** ngModelChange is an event that only occurs when the form changes
+    *** Can only use the event on elements that uses the ngModel directive
+    *** ngModelChange gets called when you change the value and it calls a function in the ts file
+
+  * Reactive Forms
+    ** In reactive forms we do not need to use FormsModule (ngModule directive)
+    ** Use [formControl] for the binding property 
+    ** We use the ReactiveRormsModule in the contact.module.ts
+    ** We have to import FormControls and ReactiveFormsModule
+    ** FormControl objects gives us a api 
+    ** Basic understanding
+      *** You can bind the information from the template to the ts file variable
+      *** Then have a method for submitting
+      *** On the template the form must have to preventDefault action for the button
+      *** Also call the method
+    ** [formGroup] directive used to group the elements
+    ** (ngSubmit) event listens for the submit on the form not the button
+      *** It is usefull cause it give the user the ability to click submit on the button and the enter key on the keyboard
+    ** Validating Reactive Forms
+      *** import Validators
+      *** Is used to check if its required, if the email is correct, min lenght of data
+      *** We can bind to the [disabled] property until form is validated
+    ** Custom Validator
+      *** Is a function
+
+  * Getter
+    ** Any time the array is modified/objects, It's going to automatically be reflected within the browers
+
+  * Constructor
+    ** A constructor is a special method(function) in a class that is automatically called when an instance of the class is created
+    ** It is mainly used for dependency injection, allowing Angular to inject services into components, directives, or other classes.
+
+  * Decorator
+    ** Input
+      *** Input - For data coming into the component | Using @Input
+      *** With Input, the information flows from parent to child
+      *** [wishes]="items.filter(filter)"
+      ------------------------------------------------------------------------------------------------------------------------------------
+    ** Output
+      *** Output - Make the component like a return function once run it does something like calls a functions
+      *** With Output, the information flows from child to parent
+      *** (filter)="filter = $event"
+
+  * Event Emitter
+    ** To create an event, we have to use what's called an event emitter
+    ** To fire that event whenever we want to emit it
+    ** An event emitter is an observable object
+
+  * Two way binding
+    ** [wishes] and (filter) is one way binding
+    ** [(ngModel)] is two way binding
+    ** [(filter)]="filter" to the ts file with input and output but a rule is to keep the output name with "Change" in the end
+
+  * Styling Components
+    ** [ngClass] is used to bind something to a property called ngClass an element
+    ** Has to be a js expression
+
+  * Event bus
+    ** Its a global object that basically lets you issue events from anywhere within the application
+    ** Also to listen for those events anywhere within the application
+
+  * Observer pattern
+    ** You have an object that needs to supply data to other objects
+    ** So those other objects subscribe to the observer object
+    ** When those changes occur it notifies the subscribers
+    ** Subject - is allow us to emulate typical events, so that we can have multiple objects that subscribe to our obserable object
+    ** Meaning that we can issue a single event and then multiple objects can be listening for the same event
+    ** An event is a message
+
+  * Dependency injection
+    ** Import service
+    ** Add to the constructor and assign to a varible 
+    ** Is used to shared funcationality cross the applications
+
+  * Http requests
+    ** Can create a service using 'ng generate service Wish'
+    ** get method returns an observable
+    ** Calling the get method, the actual request has not been sent yet
+    ** Because its an observer we need to use the subscribe method
+    ** Make the http request on the on init method
+      *** To use the 'HttpClient' you need to update the app.config.ts with the import and providers
+    ** Make handle for errors using http requests
+    ** Add a second callback function for the subscribe method
+      *** 1. Used for successful request
+      *** 2. Is for anything that goes wrong. It gets the error object
+    ** catchError
+      *** catchError is used with pipe to catch errors before it get displayed to the user
+      *** So we can log to our system and provide the user with a good error
+        **** inside the getWishes making a request
+        **** calling pipe, piping in a process that will process an error in case
+        **** We are going to write a method called handle error
+
+  * Modules
+    ** Is basically a container for like minded components
+    ** To create a module you can use 'ng generate module wish'
+    ** To generate a component inside a module use this 'ng generate component wish -m wish'
+
+  * Routes
+    ** app.routes.ts is where you set the routes
+    ** Need to give a path like localhost:4200/first and set the component to be used
+    ** <router-outlet /> is the element that outputs the content from the router
+    ** Handling "Not found" page
+      *** Have a component called not found 'ng g c NotFound'
+      *** Setting a wild card in the path for the route is with two star signs(**)
+      *** Angular uses a first-match policy for the routing table (route order)
+    * Navigating to routes
+      ** Use an <a routerLink="">Home</a> or <a routerLink="second">Second Page</a>
+      ** You need to import RouterOutlet and RouterModule
+      ** Can also programmatically route using the below
+        *** A click event with a function and a # in the href 
+        *** In the ts file import Router and add it to the constructor(private router: Router)
+        *** Then use navigate with para as an array
+      ** Providing data to routes
+      ** Route Parameters
+        *** Can use the id like { path: 'products/:id', component: ProductdetailsComponent }
+        *** localhost:4200/products/1
+        *** URL are always strings
+
+  * Help
+    ** debugger; to inspect in chrome brower tools
+    ** ? is the null checking operator. 
+      *** Example if everything before the ? is null don't do anything else, however if not null check the invalid property
+      *** contactForm.get('senderEmail')?.invalid
+    ** ng generate service Wish | ng generate module wish | ng generate component wish -m wish
+
+  
+ -->
+
+<!-- <app-wish></app-wish> -->
+<app-contact></app-contact>

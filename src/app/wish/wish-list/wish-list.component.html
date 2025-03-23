@@ -1,0 +1,11 @@
+@if (wishes.length > 0) {
+<ul class="wish-list">
+
+    @for (wish of wishes; track $index) {
+    <app-wish-list-item [wish]="wish"></app-wish-list-item>
+    }
+
+</ul>
+} @else {
+<div>There are no wishes to display.</div>
+}
